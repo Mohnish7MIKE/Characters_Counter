@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character Counter</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      box-sizing: border-box;
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    #counter {
+      margin-top: 8px;
+      color: #333;
+    }
+
+    #warning {
+      color: red;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Message Box</h2>
+  <p>200 characters max</p>
+
+  <textarea
+    id="message"
+    maxlength="200"
+    placeholder="Type your message here..."
+  ></textarea>
+
+  <p id="counter">0/200 characters (200 remaining)</p>
+  <p id="warning" aria-live="polite"></p>
+
+  <script>
+    const message = document.getElementById("message");
+    const counter = document.getElementById("counter");
+    const warning = document.getElementById("warning");
+
+    const maxCharacters = 200;
+
+    message.addEventListener("input", function () {
+      const typed = message.value.length;
+      const remaining = maxCharacters - typed;
+
+      counter.textContent =
+        `${typed}/${maxCharacters} characters (${remaining} remaining)`;
+
+      if (typed >= maxCharacters) {
+        warning.textContent = "Warning: Character limit reached!";
+      } else {
+        warning.textContent = "";
+      }
+    });
+  </script>
+
+</body>
+</html>
